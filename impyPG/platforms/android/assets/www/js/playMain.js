@@ -1,4 +1,4 @@
-var playState = {
+var playMainState = {
 	create: function(){
 		
 	},
