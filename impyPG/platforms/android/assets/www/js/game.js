@@ -1,4 +1,4 @@
-var game = new Phaser.Game(500, 340, Phaser.AUTO, 'deviceready');
+var game = new Phaser.Game(768, 1280, Phaser.AUTO, 'deviceready');
 
 game.global = {
 	
