@@ -3,7 +3,7 @@ var loadState = {
 		var loadingLabel = game.add.text(game.width/2, game.height/2, 'loading...', {font: '30px Arial', fill: '#ffffff'});
 		loadingLabel.anchor.setTo(0.5, 0.5);
 
-		game.load.spritesheet('player', '', 0, 0);
+		game.load.spritesheet('impy', 'assets/impySprite.png', 446, 610, 5);
 		game.load.image('background', 'assets/background.png');
 		game.load.image('clean', 'assets/cleanIcon.png');
 		game.load.image('food', 'assets/foodIcon.png');
