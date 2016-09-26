@@ -6,7 +6,7 @@ var playNameCharState = {
 		nameLabel.anchor.setTo(0.5, 0.5);
 
 		this.input = game.add.inputField((game.width-500)/2, game.height/4, {
-		    font: '80px Arial',
+		    font: '80px Gloria Hallelujah',
 		    fill: '#212121',
 		    fontWeight: 'bold',
 		    width: 500,
