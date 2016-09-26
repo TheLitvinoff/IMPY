@@ -2,11 +2,11 @@ var playNameCharState = {
 	create: function(){
 		game.add.image(0,0,'background');
 
-		var nameLabel = game.add.text(game.width/2, game.height/4 - 80, 'Name your Impy:', {font: '50px Gloria Hallelujah', fill: '#212121', fontWeight: 'bold'});
+		var nameLabel = game.add.text(game.width/2, game.height/4 - 80, 'Name your Impy:', {font: '50px Gloria Hallelujah', fill: '#212121', fontWeight: 'bold', align: 'center'});
 		nameLabel.anchor.setTo(0.5, 0.5);
 
 		this.input = game.add.inputField((game.width-500)/2, game.height/4, {
-		    font: '80px Arial',
+		    font: '80px Gloria Hallelujah',
 		    fill: '#212121',
 		    fontWeight: 'bold',
 		    width: 500,
