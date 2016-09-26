@@ -13,6 +13,8 @@ var bootState = {
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.renderer.renderSession.roundPixels = true;
+
+		game.add.plugin(Fabrique.Plugins.InputField);
 		
 		game.state.start('load');
 	},
