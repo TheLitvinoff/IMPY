@@ -5,7 +5,7 @@ var playNameCharState = {
 		var nameLabel = game.add.text(game.width/2, game.height/4 - 80, 'Name your Impy:', {font: '50px Arial', fill: '#212121', fontWeight: 'bold'});
 		nameLabel.anchor.setTo(0.5, 0.5);
 
-		var input = game.add.inputField((game.width-500)/2, game.height/4, {
+		this.input = game.add.inputField((game.width-500)/2, game.height/4, {
 		    font: '80px Arial',
 		    fill: '#212121',
 		    fontWeight: 'bold',
@@ -21,9 +21,6 @@ var playNameCharState = {
 		submitBtn.anchor.setTo(0.5, 0.5);
 		submitBtn.inputEnabled = true;
 		submitBtn.events.onInputDown.add(this.startMain, this)
-
-		game.global.impyName = input.value;
-		localStorage.setItem('impyName', input.value);
 	},
 
 	update: function(){
@@ -31,6 +28,9 @@ var playNameCharState = {
 	},
 
 	startMain: function() {
+		game.global.impyName = this.input.value;
+		localStorage.setItem('impyName', this.input.value);
+
 		game.state.start('playMain');
 	},
 };
