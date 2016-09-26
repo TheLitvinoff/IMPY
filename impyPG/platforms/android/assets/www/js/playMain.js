@@ -4,7 +4,7 @@ var playMainState = {
 
 		var impyName = localStorage.getItem('impyName');
 
-		var nameLabel = game.add.text(game.width/2, game.height/4 - 80, impyName, {font: '50px Arial', fill: '#212121', fontWeight: 'bold'});
+		var nameLabel = game.add.text(game.width/2, game.height/4 - 150, impyName, {font: '80px Gloria Hallelujah', fill: '#212121', fontWeight: 'bold'});
 		nameLabel.anchor.setTo(0.5, 0.5);
 
 		this.impySprite = game.add.sprite(game.width/2 - 25, game.height/2 + 110, 'impy');
