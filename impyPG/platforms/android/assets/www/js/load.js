@@ -9,6 +9,7 @@ var loadState = {
 		game.load.image('food', 'assets/foodIcon.png');
 		game.load.image('play', 'assets/playIcon.png');
 		game.load.image('goOut', 'assets/GoOutIcon.png');
+		game.load.image('nameCharBtn', 'assets/nameCharBtn.png');
 	},
 
 	create: function() {
