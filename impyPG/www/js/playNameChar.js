@@ -23,7 +23,7 @@ var playNameCharState = {
 		submitBtn.events.onInputDown.add(this.startMain, this)
 
 		game.global.impyName = input.value;
-		localStorage.setItem('impyName', game.global.impyName);
+		localStorage.setItem('impyName', input.value);
 	},
 
 	update: function(){
