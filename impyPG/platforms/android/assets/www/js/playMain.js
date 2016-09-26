@@ -10,14 +10,14 @@ var playMainState = {
 		this.impySprite = game.add.sprite(game.width/2 - 25, game.height/2 + 110, 'impy');
 		this.impySprite.anchor.setTo(0.5, 0.5);
 		//go out sprite
-		this.impySprite = game.add.sprite(game.width - 100, 150, 'goOut');
-		this.impySprite.anchor.setTo(0.5, 0.5);
+		this.goOutSprite = game.add.sprite(game.width - 100, 150, 'goOut');
+		this.goOutSprite.anchor.setTo(0.5, 0.5);
 		//food sprite
-		this.impySprite = game.add.sprite(game.width - 100, 350, 'food');
-		this.impySprite.anchor.setTo(0.5, 0.5);
+		this.foodSprite = game.add.sprite(game.width - 100, 350, 'food');
+		this.foodSprite.anchor.setTo(0.5, 0.5);
 		//play sprite
-		this.impySprite = game.add.sprite(game.width - 100, 570, 'play');
-		this.impySprite.anchor.setTo(0.5, 0.5);
+		this.playSprite = game.add.sprite(game.width - 100, 570, 'play');
+		this.playSprite.anchor.setTo(0.5, 0.5);
 
 		//animation of impy
 		this.impySprite.animations.add('blink', [1, 0], 5, false);

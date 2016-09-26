@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <script type="text/javascript" src="cordova.js"></script>
-    <!--<script type="text/javascript" src="js/index.js"></script>-->
-    <script type="text/javascript" src="js/phaser.min.js"></script>
-    <script type="text/javascript" src="js/boot.js"></script>
-    <script type="text/javascript" src="js/load.js"></script>
-    <script type="text/javascript" src="js/playNameChar.js"></script>
-    <script type="text/javascript" src="js/playMain.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
-    <!--<script type="text/javascript">
-        app.initialize();
-    </script>-->
-    <title>Impy</title>
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/phaser.min.js"></script>
+        <script type="text/javascript" src="js/boot.js"></script>
+        <script type="text/javascript" src="js/load.js"></script>
+        <script type="text/javascript" src="js/playNameChar.js"></script>
+        <script type="text/javascript" src="js/playMain.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+        <script src="node_modules/phaser-input/build/phaser-input.js"></script>
+        <title>Impy</title>
+        <style >
+            @import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+        </style>
+        <style type="text/css"> 
+            * {
+                margin: 0; 
+                padding: 0;
+            }
+            .themeText {
+                font-family: Gloria Hallelujah;
+                visibility: hidden;
+                height: 0;
+            }
+        </style>
+    </head>
 
-<body>
-    <div class="app">
-        <div id="deviceready">
-
-        </div>
-    </div>
-    
-</body>
+    <body>
+        <p class="themeText">.</p>
+    </body>
 
 </html>

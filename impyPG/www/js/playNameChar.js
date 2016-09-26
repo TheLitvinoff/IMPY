@@ -14,7 +14,7 @@ var playNameCharState = {
 		    borderWidth: 1,
 		    borderColor: '#000',
 		    borderRadius: 6,
-		    padding: 10 
+		    padding: 10
 		});
 
 		var submitBtn = game.add.sprite(game.width/2, game.height/4 + 250, 'nameCharBtn')

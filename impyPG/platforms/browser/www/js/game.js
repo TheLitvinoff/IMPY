@@ -1,4 +1,8 @@
-var game = new Phaser.Game(768, 1280, Phaser.AUTO, 'deviceready');
+var game = new Phaser.Game(779, 1334);
+
+game.global = {
+	impyName: ''
+};
 
 game.state.add('boot', bootState);
 game.state.add('load', loadState);
