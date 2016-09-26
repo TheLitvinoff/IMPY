@@ -7,7 +7,7 @@ var bootState = {
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		game.scale.setMinMax(game.width/2, game.height/2, game.width*2, game.height*2);
 		game.scale.pageAlignHorizontally = true;
-		game.scale.pageAlignVertically = trueж
+		game.scale.pageAlignVertically = true;
 
 		document.body.style.backgroundColor = '#422f28';
 
