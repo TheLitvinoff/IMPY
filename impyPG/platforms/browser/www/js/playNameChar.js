@@ -17,10 +17,10 @@ var playNameCharState = {
 		    padding: 10
 		});
 
-		var submitBtn = game.add.sprite(game.width/2, game.height/4 + 250, 'nameCharBtn')
+		var submitBtn = game.add.sprite(game.width/2, game.height/4 + 250, 'nameCharBtn');
 		submitBtn.anchor.setTo(0.5, 0.5);
 		submitBtn.inputEnabled = true;
-		submitBtn.events.onInputDown.add(this.startMain, this)
+		submitBtn.events.onInputDown.add(this.startMain, this);
 	},
 
 	update: function(){
@@ -32,6 +32,6 @@ var playNameCharState = {
 		localStorage.setItem('impyName', this.input.value);
 
 		game.state.start('playMain');
-	},
+	}
 };
 

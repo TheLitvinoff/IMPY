@@ -9,12 +9,17 @@ var playMainState = {
 		//impy sprite
 		this.impySprite = game.add.sprite(game.width/2 - 25, game.height/2 + 110, 'impy');
 		this.impySprite.anchor.setTo(0.5, 0.5);
+
 		//go out sprite
 		this.goOutSprite = game.add.sprite(game.width - 100, 150, 'goOut');
 		this.goOutSprite.anchor.setTo(0.5, 0.5);
+		this.goOutSprite.inputEnabled = true;
+		this.goOutSprite.events.onInputDown.add(this.startGeo, this);
+
 		//food sprite
 		this.foodSprite = game.add.sprite(game.width - 100, 350, 'food');
 		this.foodSprite.anchor.setTo(0.5, 0.5);
+
 		//play sprite
 		this.playSprite = game.add.sprite(game.width - 100, 570, 'play');
 		this.playSprite.anchor.setTo(0.5, 0.5);
@@ -31,6 +36,9 @@ var playMainState = {
 
 	impyBlink: function() {
 		this.impySprite.animations.play('blink');
+	},
+	startGeo: function() {
+		game.state.start('playGeo');
 	},
 };
 
