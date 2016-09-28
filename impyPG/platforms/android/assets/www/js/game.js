@@ -4,6 +4,7 @@ game.global = {
 	impyName: '',
 	latitude: 0,
 	longitude: 0,
+	latLabel: ''
 };
 
 game.state.add('boot', bootState);

@@ -9,9 +9,6 @@ var playGeoState = {
 		this.impySprite = game.add.sprite(game.width/2, game.height/2, 'radarImpy');
 		this.impySprite.anchor.setTo(0.5, 0.5);
 
-		//add group of clothes
-
-
 		//back buttin
 		this.backSprite = game.add.sprite(100, 150, 'back');
 		this.backSprite.anchor.setTo(0.5, 0.5);
@@ -20,9 +17,9 @@ var playGeoState = {
 
 		this.clothesNum = 0;
 
-		/*game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
+		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
-	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
+	   	/*game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	    game.global.lonLabel.anchor.setTo(0.5, 0.5);*/
 	},
 
@@ -32,6 +29,7 @@ var playGeoState = {
 			this.addClothes();
 		}
 		this.checkClothesPosition();	
+		this.checkCompass();
 	}, 
 
 	getGeo: function() {
@@ -72,6 +70,19 @@ var playGeoState = {
 			this.clothesSprite.position.x = clothesGamePosX;
 			this.clothesSprite.position.y = clothesGamePosY;
 		}
+	},
+
+	checkCompass: function() {
+		function onSuccess(heading) {
+			this.magHead = heading.magneticHeading;
+		    game.global.latLabel.setText(this.magHead); 
+		};
+
+		function onError(error) {
+		    alert('CompassError: ' + error.code);
+		};
+
+		navigator.compass.getCurrentHeading(onSuccess, onError);
 	},
 
 	startMain: function() {
