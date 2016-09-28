@@ -2,8 +2,8 @@ var game = new Phaser.Game(779, 1334);
 
 game.global = {
 	impyName: '',
-	latitude: '',
-	longitude: ''
+	latitude: 0,
+	longitude: 0,
 };
 
 game.state.add('boot', bootState);
