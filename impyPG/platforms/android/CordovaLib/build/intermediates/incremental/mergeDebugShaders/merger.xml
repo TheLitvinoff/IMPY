@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\viach\Desktop\STIU\2016(1)\ITE445 - Mobile Games Development\impy\impyPG\platforms\android\CordovaLib\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\viach\Desktop\STIU\2016(1)\ITE445 - Mobile Games Development\impy\impyPG\platforms\android\CordovaLib\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\viach\Desktop\STIU\Projects\impy\impyPG\platforms\android\CordovaLib\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\viach\Desktop\STIU\Projects\impy\impyPG\platforms\android\CordovaLib\src\debug\shaders"/></dataSet></merger>
