@@ -10,6 +10,10 @@ var loadState = {
 		game.load.image('play', 'assets/playIcon.png');
 		game.load.image('goOut', 'assets/goOutIcon.png');
 		game.load.image('nameCharBtn', 'assets/nameCharBtn.png');
+		game.load.image('back', 'assets/backIcon.png');
+		game.load.image('geoClothes', 'assets/geoClothes.png');
+		game.load.image('radarImpy', 'assets/radarImpy.png');
+		game.load.image('geoGrid', 'assets/geoGrid.png');
 	},
 
 	create: function() {
