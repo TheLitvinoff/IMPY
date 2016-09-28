@@ -15,6 +15,10 @@ var playGeoState = {
 		this.backSprite.inputEnabled = true;
 		this.backSprite.events.onInputDown.add(this.startMain, this);
 
+		//compass arrow
+		game.global.compArr = game.add.sprite(game.width/2, game.height/2, 'compassArrow')
+		game.global.compArr.anchor.setTo(0.5, 1);
+
 		this.clothesNum = 0;
 
 		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
@@ -49,7 +53,7 @@ var playGeoState = {
 	   	};
 
 	   	function onError(error) {
-	      	var errorLabel = game.add.text(game.width/2, game.height/4 - 200,  'code: '    + error.code    + '\n' + 'message: ' + error.message + '\n', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
+	      	var errorLabel = game.add.text(game.width/2, game.height/4 - 200,  'GEO code: '    + error.code    + '\n' + 'message: ' + error.message + '\n', {font: '50px Gloria Hallelujah', fill: '#ff0000', fontWeight: 'bold', align: 'center'});
 	    	errorLabel.anchor.setTo(0.5, 0.5);
 	   	}
 	},
@@ -74,12 +78,17 @@ var playGeoState = {
 
 	checkCompass: function() {
 		function onSuccess(heading) {
+			if (this.magHead) {	
+				this.angleDiff = heading.magneticHeading - magHead;
+				game.global.compArr.angle += this.angleDiff;
+			}
 			this.magHead = heading.magneticHeading;
 		    game.global.latLabel.setText(this.magHead); 
 		};
 
 		function onError(error) {
-		    alert('CompassError: ' + error.code);
+		    var errorLabel = game.add.text(game.width/2, game.height/4 - 200,  'CompassError: ' + error.code, {font: '50px Gloria Hallelujah', fill: '#ff0000', fontWeight: 'bold', align: 'center'});
+	    	errorLabel.anchor.setTo(0.5, 0.5);
 		};
 
 		navigator.compass.getCurrentHeading(onSuccess, onError);

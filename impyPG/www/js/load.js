@@ -14,6 +14,7 @@ var loadState = {
 		game.load.image('geoClothes', 'assets/geoClothes.png');
 		game.load.image('radarImpy', 'assets/radarImpy.png');
 		game.load.image('geoGrid', 'assets/geoGrid.png');
+		game.load.image('compassArrow', 'assets/compassArrow.png');
 	},
 
 	create: function() {
