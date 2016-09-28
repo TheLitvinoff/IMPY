@@ -1,9 +1,14 @@
 var playGeoState = {
 	create: function() {
-		this.goOutSprite = game.add.sprite(game.width - 100, 150, 'goOut');
-		this.goOutSprite.anchor.setTo(0.5, 0.5);
-		this.goOutSprite.inputEnabled = true;
-		//this.goOutSprite.events.onInputDown.add(this.getGeo, this);
+		game.add.image(game.width/2, game.height/2,'geoGrid');
+
+		this.impySprite = game.add.sprite(game.width/2, game.height/2, 'radarImpy');
+		this.impySprite.anchor.setTo(0.5, 0.5);
+
+		this.backSprite = game.add.sprite(100, 150, 'back');
+		this.backSprite.anchor.setTo(0.5, 0.5);
+		this.backSprite.inputEnabled = true;
+		this.goOutSprite.events.onInputDown.add(this.startMain, this);
 
 		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
@@ -32,5 +37,8 @@ var playGeoState = {
 	   	function onError(error) {
 	      	//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
 	   	}
+	},
+	startMain: function() {
+		game.state.start('playMain');
 	},
 };
