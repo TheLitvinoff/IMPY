@@ -23,8 +23,8 @@ var playGeoState = {
 
 		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
-	   	/*game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
-	    game.global.lonLabel.anchor.setTo(0.5, 0.5);*/
+	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
+	    game.global.lonLabel.anchor.setTo(0.5, 0.5);
 	},
 
 	update: function() {
@@ -48,8 +48,8 @@ var playGeoState = {
 	   	function onSuccess(position) {
 	   		game.global.latitude = position.coords.latitude;
 	   		game.global.longitude = position.coords.longitude;
-	   		/*game.global.latLabel.setText(this.posLat);
-	   		game.global.lonLabel.setText(this.posLon);*/
+	   		/*game.global.latLabel.setText(this.posLat);*/
+	   		game.global.lonLabel.setText(game.global.longitude);
 	   	};
 
 	   	function onError(error) {
@@ -60,8 +60,8 @@ var playGeoState = {
 
 	addClothes: function() {
 		if (game.global.latitude != 0 && game.global.longitude != 0) {
-			this.clothesLat = game.global.latitude + 0.00001;
-			this.clothesLon = game.global.longitude + 0.00001;
+			this.clothesLat = game.global.latitude + 0.000005;
+			this.clothesLon = game.global.longitude + 0.000005;
 			this.clothesSprite = game.add.sprite(game.width + 100, game.height + 100, 'geoClothes');	
 			this.clothesNum++;
 		}
@@ -69,8 +69,8 @@ var playGeoState = {
 
 	checkClothesPosition: function() {
 		if (this.clothesSprite) {
-			var clothesGamePosX = ((this.clothesLat-game.global.latitude)*1000) * (game.height/4) + game.height/2;
-			var clothesGamePosY = ((this.clothesLon-game.global.longitude)*1000) * (game.width/4) + game.width/2;
+			var clothesGamePosX =  game.height/2 + ((this.clothesLat-game.global.latitude)*1000) * (game.height/4);
+			var clothesGamePosY =   game.width/2 + ((this.clothesLon-game.global.longitude)*1000) * (game.width/4);
 			this.clothesSprite.position.x = clothesGamePosX;
 			this.clothesSprite.position.y = clothesGamePosY;
 		}
