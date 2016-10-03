@@ -17,8 +17,7 @@ var playGeoState = {
 		this.backSprite.events.onInputDown.add(this.startMain, this);
 
 		//clothes
-		this.clothes = game.add.group();
-		game.physics.arcade.enable(this.clothes);
+		this.clothes = game.add.physicsGroup();
 
 		//compass arrow
 		//game.global.compArr = game.add.sprite(game.width/2, game.height/2, 'compassArrow')
