@@ -15,26 +15,29 @@ var playGeoState = {
 		this.backSprite.inputEnabled = true;
 		this.backSprite.events.onInputDown.add(this.startMain, this);
 
+		//clothes
+		this.clothes = game.add.group();
+
 		//compass arrow
 		//game.global.compArr = game.add.sprite(game.width/2, game.height/2, 'compassArrow')
 		//game.global.compArr.anchor.setTo(0.5, 1);
-
-		this.clothesNum = 0;
 
 		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
 	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	    game.global.lonLabel.anchor.setTo(0.5, 0.5);
-	    //game.global.magHead = 0;
+	    game.global.magHead = 0;
+
+
+		this.getGeo();
+		this.addClothes();
+		this.setClothesPosition();
 	},
 
 	update: function() {
 		this.getGeo();
-		this.checkCompass();
-		if (this.clothesNum < 3) {
-			this.addClothes();
-		}
-		this.checkClothesPosition();	
+		//this.checkCompass();
+		this.checkClothesPosition();
 	}, 
 
 	getGeo: function() {
@@ -59,32 +62,40 @@ var playGeoState = {
 	},
 
 	addClothes: function() {
-		if (game.global.latitude != 0 && game.global.longitude != 0) {
-			this.clothesLat = game.global.latitude + (Math.floor(Math.random() * 10) - 10)/10000 ;
-			this.clothesLon = game.global.longitude + (Math.floor(Math.random() * 10) - 10)/10000 ;
-			this.clothesSprite = game.add.sprite(game.width + 100, game.height + 100, 'geoClothes');	
-			this.clothesNum++;
+		for (var i=0; i < 3; i++) {
+			this.clothes.create(game.width, game.height, 'geoClothes');	
+		}
+	},
+
+	setClothesPosition: function() {
+		this.positions = [];
+		for (var i = 0; i < 3; i++) {
+			var latitude = game.global.latitude + (Math.floor(Math.random() * 10) - 10)/10000;
+			var longitude = game.global.longitude + (Math.floor(Math.random() * 10) - 10)/10000;
+			var positionLatLon = [latitude, longitude];
+			this.positions[i] = positionLatLon;
 		}
 	},
 
 	checkClothesPosition: function() {
-		if (this.clothesSprite) {
-			/*var clothesGamePosX =  game.height/2 + ((this.clothesLat-game.global.latitude)*1000) * (game.height/4);
-			var clothesGamePosY =   game.width/2 + ((this.clothesLon-game.global.longitude)*1000) * (game.width/4);
-			this.clothesSprite.position.x = clothesGamePosX;
-			this.clothesSprite.position.y = clothesGamePosY;*/
-			var clothesGamePosX =  game.width/2 + (((this.clothesLon-game.global.longitude)*1000) * (game.width/2));
-			var clothesGamePosY =   game.height/4 - ((this.clothesLat-game.global.latitude)*1000) * (game.height/4);
-			this.clothesSprite.position.x = clothesGamePosX;
-			this.clothesSprite.position.y = clothesGamePosY;
+		if ((this.clothes.countLiving() > 0) && !(this.positions[2][1] === null)) {
+			for (var i = 0; i < this.clothes.countLiving(); i++) {
+				var clothesLongitude = this.positions[i][1];
+				var clothesLatitude = this.positions[i][0];
+				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2));
+				var clothesGamePosY =   game.height/4 - ((clothesLatitude-game.global.latitude)*1000) * (game.height/4);
+				this.clothes.getAt(i).position.x = clothesGamePosX;
+				this.clothes.getAt(i).position.y = clothesGamePosY;
 
-			if (game.global.magHead) {
-				var radius = Math.sqrt(Math.pow((game.width/2 - clothesGamePosX), 2) + Math.pow((game.height/2 + clothesGamePosY), 2));
-				var angleRad = game.global.magHead * Math.PI / 180;
-				var distancePx = Math.sqrt(2*Math.pow(radius, 2) - Math.pow(radius, 2)*Math.cos(angleRad));
+				if (game.global.magHead) {
+					var radius = Math.sqrt(Math.pow((game.width/2 - clothesGamePosX), 2) + Math.pow((game.height/2 + clothesGamePosY), 2));
+					var angleRad = game.global.magHead * Math.PI / 180;
+					var distancePx = Math.sqrt(2*Math.pow(radius, 2) - Math.pow(radius, 2)*Math.cos(angleRad));
 
-				this.clothesSprite.position.rotate(game.width/2, game.height/2, -(game.global.magHead), distancePx);
+					clothingUnit.position.rotate(game.width/2, game.height/2, -(game.global.magHead), distancePx);
+				}
 			}
+			
 		}
 	},
 
