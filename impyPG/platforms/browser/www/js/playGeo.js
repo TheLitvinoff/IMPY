@@ -29,17 +29,16 @@ var playGeoState = {
 
 	update: function() {
 		this.getGeo();
+		this.checkCompass();
 		if (this.clothesNum < 1) {
 			this.addClothes();
 		}
 		this.checkClothesPosition();	
-		this.checkCompass();
 	}, 
 
 	getGeo: function() {
 		var options = {
 	    	maximumAge: 3000, 
-	    	timeout: 5000, 
 	    	enableHighAccuracy: true
 	   	}
 		
@@ -60,8 +59,8 @@ var playGeoState = {
 
 	addClothes: function() {
 		if (game.global.latitude != 0 && game.global.longitude != 0) {
-			this.clothesLat = game.global.latitude + 0.000005;
-			this.clothesLon = game.global.longitude + 0.000005;
+			this.clothesLat = game.global.latitude + 0.00001;
+			this.clothesLon = game.global.longitude + 0.00001;
 			this.clothesSprite = game.add.sprite(game.width + 100, game.height + 100, 'geoClothes');	
 			this.clothesNum++;
 		}
@@ -69,25 +68,37 @@ var playGeoState = {
 
 	checkClothesPosition: function() {
 		if (this.clothesSprite) {
+			/*var clothesGamePosX =  game.height/2 + ((this.clothesLat-game.global.latitude)*1000) * (game.height/4);
+			var clothesGamePosY =   game.width/2 + ((this.clothesLon-game.global.longitude)*1000) * (game.width/4);
+			this.clothesSprite.position.x = clothesGamePosX;
+			this.clothesSprite.position.y = clothesGamePosY;*/
 			var clothesGamePosX =  game.height/2 + ((this.clothesLat-game.global.latitude)*1000) * (game.height/4);
 			var clothesGamePosY =   game.width/2 + ((this.clothesLon-game.global.longitude)*1000) * (game.width/4);
 			this.clothesSprite.position.x = clothesGamePosX;
 			this.clothesSprite.position.y = clothesGamePosY;
+
+			if (game.global.magHead) {
+				var radius = Math.sqrt(Math.pow((game.width/2 - clothesGamePosX), 2) + Math.pow((game.height/2 + clothesGamePosY), 2));
+				var angleRad = game.global.magHead * Math.PI / 180;
+				var distancePx = Math.sqrt(2*Math.pow(radius, 2) - Math.pow(radius, 2)*Math.cos(angleRad));
+
+				this.clothesSprite.position.rotate(game.width/2, game.height/2, -(game.global.magHead), distancePx);
+			}
 		}
 	},
 
 	checkCompass: function() {
 		function onSuccess(heading) {
-			if (this.magHead) {	
-				this.angleDiff = heading.magneticHeading - magHead;
+			if (game.global.magHead) {	
+				this.angleDiff = heading.magneticHeading - game.global.magHead;
 				game.global.compArr.angle += this.angleDiff;
 			}
-			this.magHead = heading.magneticHeading;
+			game.global.magHead = heading.magneticHeading;
 		    game.global.latLabel.setText(this.magHead); 
 		};
 
 		function onError(error) {
-		    var errorLabel = game.add.text(game.width/2, game.height/4 - 200,  'CompassError: ' + error.code, {font: '50px Gloria Hallelujah', fill: '#ff0000', fontWeight: 'bold', align: 'center'});
+		    var errorLabel = game.add.text(game.width/2, game.height/4 - 200,  'CompassError: ' + error.code, {font: '20px Gloria Hallelujah', fill: '#ff0000', fontWeight: 'bold', align: 'center'});
 	    	errorLabel.anchor.setTo(0.5, 0.5);
 		};
 

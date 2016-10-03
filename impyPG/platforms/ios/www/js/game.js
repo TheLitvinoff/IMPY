@@ -6,7 +6,8 @@ game.global = {
 	longitude: 0,
 	latLabel: '',
 	lonLabel: '',
-	compArr: ''
+	compArr: '', 
+	magHead: ''
 };
 
 game.state.add('boot', bootState);
