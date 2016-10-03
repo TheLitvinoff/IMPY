@@ -27,9 +27,9 @@ var playGeoState = {
 	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	    game.global.lonLabel.anchor.setTo(0.5, 0.5);
 
-		this.getGeo();
 		this.addClothes();
 		this.setClothesPosition();
+		//game.global.magHead = 0;
 	},
 
 	update: function() {
@@ -77,7 +77,7 @@ var playGeoState = {
 
 	checkClothesPosition: function() {
 		if ((this.clothes.countLiving() > 0) && !(this.positions[2][1] === null)) {
-			for (var i = 0; i < this.clothes.countLiving(); i++) {
+			for (var i = 0; i < 3; i++) {
 				var clothesLongitude = this.positions[i][1];
 				var clothesLatitude = this.positions[i][0];
 				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2));
@@ -90,7 +90,7 @@ var playGeoState = {
 					var angleRad = game.global.magHead * Math.PI / 180;
 					var distancePx = Math.sqrt(2*Math.pow(radius, 2) - Math.pow(radius, 2)*Math.cos(angleRad));
 
-					clothingUnit.position.rotate(game.width/2, game.height/2, -(game.global.magHead), distancePx);
+					this.clothes.getAt(i).position.rotate(game.width/2, game.height/2, -(game.global.magHead), distancePx);
 				}
 			}
 			
