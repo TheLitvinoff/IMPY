@@ -25,12 +25,12 @@ var playGeoState = {
 	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
 	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
 	    game.global.lonLabel.anchor.setTo(0.5, 0.5);
-	    game.global.magHead = 0;
+	    //game.global.magHead = 0;
 	},
 
 	update: function() {
 		this.getGeo();
-		//this.checkCompass();
+		this.checkCompass();
 		if (this.clothesNum < 3) {
 			this.addClothes();
 		}
