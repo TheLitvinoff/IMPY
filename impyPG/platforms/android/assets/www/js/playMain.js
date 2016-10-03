@@ -19,6 +19,8 @@ var playMainState = {
 		//food sprite
 		this.foodSprite = game.add.sprite(game.width - 100, 350, 'food');
 		this.foodSprite.anchor.setTo(0.5, 0.5);
+		this.foodSprite.inputEnabled = true;
+		this.foodSprite.events.onInputDown.add(this.restoreProperties, this);
 
 		//play sprite
 		this.playSprite = game.add.sprite(game.width - 100, 570, 'play');
@@ -27,11 +29,32 @@ var playMainState = {
 		//animation of impy
 		this.impySprite.animations.add('blink', [1, 0], 5, false);
 		this.impySprite.inputEnabled = true;
-		this.impySprite.events.onInputDown.add(this.impyBlink, this)
+		this.impySprite.events.onInputDown.add(this.impyBlink, this);
+
+		//health
+		this.heartSprite = game.add.sprite(game.width -500, 1240, 'heart');
+		this.heartSprite.anchor.setTo(0.5, 0.5);
+
+		this.impySprite.customParams = {health: 100};
+
+		var style = {font: '50px Gloria Hallelujah', fill: '#481b10'};
+		this.game.add.text(315, 1200, "Health: ", style);
+		this.healthText = this.game.add.text(500, 1200, "", style);
+		this.refreshHealth();
+
+		this.healthDecreaser = this.game.time.events.loop(Phaser.Timer.SECOND * 5, this.reduceProperties, this);
+		this.healthDecreaser.timer.start();
 	},
 
 	update: function(){
-		
+		if(this.impySprite.customParams.health <= 0){
+			this.impySprite.customParams.health = 0;
+			this.impySprite.frame = 2;
+		}
+		else if(this.impySprite.customParams.health <= 20){
+			this.impySprite.customParams.health = 20;
+			this.impySprite.frame = 0;
+		}
 	},
 
 	impyBlink: function() {
@@ -40,5 +63,18 @@ var playMainState = {
 	startGeo: function() {
 		game.state.start('playGeo');
 	},
+	refreshHealth: function(){
+		this.healthText.text = this.impySprite.customParams.health;
+	},
+	reduceProperties: function(){
+		this.impySprite.customParams.health = Math.max(0, this.impySprite.customParams.health - 20);
+		this.refreshHealth();
+	},
+	restoreProperties: function(){
+		this.impySprite.customParams.health = Math.max(20, this.impySprite.customParams.health + 20);
+		this.refreshHealth();
+	},
+	
 };
+
 
