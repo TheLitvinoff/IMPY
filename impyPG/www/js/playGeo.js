@@ -8,6 +8,7 @@ var playGeoState = {
 		//add character pic
 		this.impySprite = game.add.sprite(game.width/2, game.height/2, 'radarImpy');
 		this.impySprite.anchor.setTo(0.5, 0.5);
+		game.physics.arcade.enable(this.impySprite);
 
 		//back buttin
 		this.backSprite = game.add.sprite(100, 150, 'back');
@@ -17,6 +18,7 @@ var playGeoState = {
 
 		//clothes
 		this.clothes = game.add.group();
+		game.physics.arcade.enable(this.clothes);
 
 		//compass arrow
 		//game.global.compArr = game.add.sprite(game.width/2, game.height/2, 'compassArrow')
@@ -29,13 +31,15 @@ var playGeoState = {
 
 		this.addClothes();
 		this.setClothesPosition();
-		//game.global.magHead = 0;
+		game.global.magHead = 0;
 	},
 
 	update: function() {
 		this.getGeo();
-		this.checkCompass();
+		//this.checkCompass();
 		this.checkClothesPosition();
+
+		game.physics.arcade.overlap(this.clothes, this.impySprite, this.takeClothes, null, this);
 	}, 
 
 	getGeo: function() {
@@ -68,8 +72,8 @@ var playGeoState = {
 	setClothesPosition: function() {
 		this.positions = [];
 		for (var i = 0; i < 3; i++) {
-			var latitude = game.global.latitude + (Math.floor(Math.random() * 10) - 10)/10000;
-			var longitude = game.global.longitude + (Math.floor(Math.random() * 10) - 10)/10000;
+			var latitude = game.global.latitude + (Math.floor(Math.random() * 21) - 10)/10000;
+			var longitude = game.global.longitude + (Math.floor(Math.random() * 21) - 10)/10000;
 			var positionLatLon = [latitude, longitude];
 			this.positions[i] = positionLatLon;
 		}
@@ -81,7 +85,7 @@ var playGeoState = {
 				var clothesLongitude = this.positions[i][1];
 				var clothesLatitude = this.positions[i][0];
 				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2));
-				var clothesGamePosY =   game.height/4 - ((clothesLatitude-game.global.latitude)*1000) * (game.height/4);
+				var clothesGamePosY =  game.height/2 - (((clothesLatitude-game.global.latitude)*1000) * (game.height/4));
 				this.clothes.getAt(i).position.x = clothesGamePosX;
 				this.clothes.getAt(i).position.y = clothesGamePosY;
 
@@ -109,6 +113,10 @@ var playGeoState = {
 		};
 
 		navigator.compass.getCurrentHeading(onSuccess, onError);
+	},
+
+	takeClothes: function() {
+		game.state.start('playMain');
 	},
 
 	startMain: function() {
