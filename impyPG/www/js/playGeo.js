@@ -63,14 +63,14 @@ var playGeoState = {
 	},
 
 	addClothes: function() {
-		for (var i=0; i < 3; i++) {
+		for (var i=0; i < game.global.clothesNumber; i++) {
 			this.clothes.create(game.width, game.height, 'geoClothes');	
 		}
 	},
 
 	setClothesPosition: function() {
 		this.positions = [];
-		for (var i = 0; i < 3; i++) {
+		for (var i = 0; i < game.global.clothesNumber; i++) {
 			var latitude = game.global.latitude + (Math.floor(Math.random() * 21) - 10)/10000;
 			var longitude = game.global.longitude + (Math.floor(Math.random() * 21) - 10)/10000;
 			var positionLatLon = [latitude, longitude];
@@ -79,18 +79,21 @@ var playGeoState = {
 	},
 
 	checkClothesPosition: function() {
-		if ((this.clothes.countLiving() > 0) && !(this.positions[2][1] === null)) {
-			for (var i = 0; i < 3; i++) {
-				var clothesLongitude = this.positions[i][1];
-				var clothesLatitude = this.positions[i][0];
-				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2));
+		if ((this.clothes.countLiving() > 0) && !(this.positions[game.global.clothesNumber-1][1] === null)) {
+			for (var i = 0; i < game.global.clothesNumber; i++) {
+				var clothesLongitude = this.positions[i][1]; //longitude in 2-level array
+				var clothesLatitude = this.positions[i][0]; //latitude in 2-level array
+				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2)); //translate from actual latitude and longitude to the screen size
 				var clothesGamePosY =  game.height/2 - (((clothesLatitude-game.global.latitude)*1000) * (game.height/4));
 				this.clothes.getAt(i).position.x = clothesGamePosX;
 				this.clothes.getAt(i).position.y = clothesGamePosY;
 
 				if (game.global.magHead) {
+					//pithagor's theorem (c^2 = a^2 + b^2)
 					var radius = Math.sqrt(Math.pow((game.width/2 - clothesGamePosX), 2) + Math.pow((game.height/2 + clothesGamePosY), 2));
+					//translate angle from degrees to radians
 					var angleRad = game.global.magHead * Math.PI / 180;
+					//find a triangle's side by formula: sqrt(r^2*r^2 - r^2*Cos(Difference angle)) 
 					var distancePx = Math.sqrt(2*Math.pow(radius, 2) - Math.pow(radius, 2)*Math.cos(angleRad));
 
 					this.clothes.getAt(i).position.rotate(game.width/2, game.height/2, -(game.global.magHead), distancePx);
@@ -116,6 +119,7 @@ var playGeoState = {
 
 	takeClothes: function() {
 		game.state.start('playMain');
+		game.global.clothesNumber--;
 	},
 
 	startMain: function() {
