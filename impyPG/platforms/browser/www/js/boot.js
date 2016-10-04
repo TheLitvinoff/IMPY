@@ -4,6 +4,7 @@ var bootState = {
 
 	create: function() {
 		game.stage.backgroundColor = "#faceff";
+		game.physics.startSystem(Phaser.Physics.ARCADE);
 		//scaling 
 		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 		game.scale.setMinMax(game.width/4, game.height/2.35, game.width*2, game.height*2);
