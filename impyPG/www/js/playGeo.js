@@ -30,12 +30,12 @@ var playGeoState = {
 
 		this.addClothes();
 		this.setClothesPosition();
-		game.global.magHead = 0;
+		//game.global.magHead = 0;
 	},
 
 	update: function() {
 		this.getGeo();
-		//this.checkCompass();
+		this.checkCompass();
 		this.checkClothesPosition();
 
 		game.physics.arcade.overlap(this.clothes, this.impySprite, this.takeClothes, null, this);
