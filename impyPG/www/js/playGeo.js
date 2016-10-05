@@ -31,10 +31,10 @@ var playGeoState = {
 		this.addClothes();
 		this.setClothesPosition();
 		//game.global.magHead = 0;
+		this.getGeo();
 	},
 
 	update: function() {
-		this.getGeo();
 		this.checkCompass();
 		this.checkClothesPosition();
 
@@ -43,16 +43,17 @@ var playGeoState = {
 
 	getGeo: function() {
 		var options = {
-	    	maximumAge: 3000, 
-	    	enableHighAccuracy: true
+			maximumAge: 3000, 
+			timeout: 10000, 
+			enableHighAccuracy: true
 	   	}
 		
-	   	var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+	   	var watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
 
 	   	function onSuccess(position) {
 	   		game.global.latitude = position.coords.latitude;
 	   		game.global.longitude = position.coords.longitude;
-	   		/*game.global.latLabel.setText(this.posLat);*/
+	   		game.global.latLabel.setText(game.global.latitude);
 	   		game.global.lonLabel.setText(game.global.longitude);
 	   	};
 
@@ -106,7 +107,7 @@ var playGeoState = {
 	checkCompass: function() {
 		function onSuccess(heading) {
 			game.global.magHead = heading.magneticHeading;
-		    game.global.latLabel.setText(this.magHead); 
+		    //game.global.latLabel.setText(this.magHead); 
 		};
 
 		function onError(error) {
@@ -117,8 +118,9 @@ var playGeoState = {
 		navigator.compass.getCurrentHeading(onSuccess, onError);
 	},
 
-	takeClothes: function() {
-		game.state.start('playMain');
+	takeClothes: function(impy, cap) {
+		cap.kill();
+		//game.state.start('playMain');
 		game.global.clothesNumber--;
 	},
 

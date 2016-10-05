@@ -7,7 +7,8 @@ game.global = {
 	latLabel: '',
 	lonLabel: '',
 	compArr: '', 
-	magHead: ''
+	magHead: '',
+	clothesNumber: 3
 };
 
 game.state.add('boot', bootState);
