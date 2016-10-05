@@ -19,23 +19,17 @@ var playGeoState = {
 		//clothes
 		this.clothes = game.add.physicsGroup();
 
-		//compass arrow
-		//game.global.compArr = game.add.sprite(game.width/2, game.height/2, 'compassArrow')
-		//game.global.compArr.anchor.setTo(0.5, 1);
-
-		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
-	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
-	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
-	    game.global.lonLabel.anchor.setTo(0.5, 0.5);
-
+		var capsMeter = game.add.sprite(game.width/2-100, 100, 'geoClothes');
+		this.capsLabel = game.add.text(game.width/2-10, 90,  ' : ' + game.global.capsNum, {font: '50px Gloria Hallelujah', fill: '#212121', fontWeight: 'bold', align: 'center'});
+	   	
 		this.addClothes();
 		this.setClothesPosition();
-		//game.global.magHead = 0;
+		game.global.magHead = 0;
 		this.getGeo();
 	},
 
 	update: function() {
-		this.checkCompass();
+		//this.checkCompass();
 		this.checkClothesPosition();
 
 		game.physics.arcade.overlap(this.clothes, this.impySprite, this.takeClothes, null, this);
@@ -53,8 +47,6 @@ var playGeoState = {
 	   	function onSuccess(position) {
 	   		game.global.latitude = position.coords.latitude;
 	   		game.global.longitude = position.coords.longitude;
-	   		game.global.latLabel.setText(game.global.latitude);
-	   		game.global.lonLabel.setText(game.global.longitude);
 	   	};
 
 	   	function onError(error) {
@@ -107,7 +99,6 @@ var playGeoState = {
 	checkCompass: function() {
 		function onSuccess(heading) {
 			game.global.magHead = heading.magneticHeading;
-		    //game.global.latLabel.setText(this.magHead); 
 		};
 
 		function onError(error) {
@@ -121,6 +112,8 @@ var playGeoState = {
 	takeClothes: function(impy, cap) {
 		cap.kill();
 		//game.state.start('playMain');
+		game.global.capsNum++;
+		this.capsLabel.setText(' : ' + game.global.capsNum);
 		game.global.clothesNumber--;
 	},
 

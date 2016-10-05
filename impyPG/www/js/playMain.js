@@ -25,6 +25,9 @@ var playMainState = {
 		//play sprite
 		this.playSprite = game.add.sprite(game.width - 100, 570, 'play');
 		this.playSprite.anchor.setTo(0.5, 0.5);
+		this.playSprite.inputEnabled = true;
+		this.playSprite.events.onInputDown.add(this.startClothes, this);
+
 
 		//animation of impy
 		this.impySprite.animations.add('blink', [1, 0], 5, false);
@@ -73,6 +76,9 @@ var playMainState = {
 	restoreProperties: function(){
 		this.impySprite.customParams.health = Math.max(20, this.impySprite.customParams.health + 20);
 		this.refreshHealth();
+	},
+	startClothes: function() {
+		game.state.start('clothes');
 	},
 	
 };
