@@ -12,18 +12,12 @@ game.global = {
 			isEnabled: false,
 			isWearing: false, 
 			name: 'redGlasses',
-			price: 3,
-			check: 0
-		},
-		blackGlasses: {
-			isEnabled: false,
-			isWearing: false,
-			name: 'blackGlasses',
 			price: 2,
 			check: 0
 		}
 	},
-	capsNum: 0
+	capsNum: 90,
+	clothesSprite: null
 };
 
 game.state.add('boot', bootState);

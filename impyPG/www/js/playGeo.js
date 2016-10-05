@@ -24,12 +24,12 @@ var playGeoState = {
 	   	
 		this.addClothes();
 		this.setClothesPosition();
-		game.global.magHead = 0;
+		//game.global.magHead = 0;
 		this.getGeo();
 	},
 
 	update: function() {
-		//this.checkCompass();
+		this.checkCompass();
 		this.checkClothesPosition();
 
 		game.physics.arcade.overlap(this.clothes, this.impySprite, this.takeClothes, null, this);
@@ -111,7 +111,6 @@ var playGeoState = {
 
 	takeClothes: function(impy, cap) {
 		cap.kill();
-		//game.state.start('playMain');
 		game.global.capsNum++;
 		this.capsLabel.setText(' : ' + game.global.capsNum);
 		game.global.clothesNumber--;

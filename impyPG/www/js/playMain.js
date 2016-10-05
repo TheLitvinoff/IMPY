@@ -47,6 +47,8 @@ var playMainState = {
 
 		this.healthDecreaser = this.game.time.events.loop(Phaser.Timer.SECOND * 5, this.reduceProperties, this);
 		this.healthDecreaser.timer.start();
+
+		this.checkClothes();
 	},
 
 	update: function(){
@@ -80,7 +82,15 @@ var playMainState = {
 	startClothes: function() {
 		game.state.start('clothes');
 	},
-	
+
+	checkClothes: function() {
+		for (var clothesUnit in game.global.clothes) {
+			if (game.global.clothes[clothesUnit]['isWearing']) {
+				this.clothesWear = game.add.sprite(game.width/2-90, game.height/2+25, game.global.clothes[clothesUnit]['name']);
+				this.clothesWear.anchor.setTo(0.5, 0.5);
+			}
+		}
+	}
 };
 
 
