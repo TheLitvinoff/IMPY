@@ -118,8 +118,9 @@ var playGeoState = {
 		navigator.compass.getCurrentHeading(onSuccess, onError);
 	},
 
-	takeClothes: function() {
-		game.state.start('playMain');
+	takeClothes: function(impy, cap) {
+		cap.kill();
+		//game.state.start('playMain');
 		game.global.clothesNumber--;
 	},
 
