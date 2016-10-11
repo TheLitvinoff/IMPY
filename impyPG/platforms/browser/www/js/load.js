@@ -16,6 +16,10 @@ var loadState = {
 		game.load.image('geoGrid', 'assets/geoGrid.png');
 		game.load.image('compassArrow', 'assets/compassArrow.png');
 		game.load.image('heart', 'assets/healthIcon.png');
+		game.load.image('redGlasses', 'assets/redglasses.png');
+		game.load.image('blackGlasses', 'assets/blackglasses.png');
+		game.load.image('clothesFrame', 'assets/frame.png');
+		game.load.image('okay', 'assets/okay.png');
 	},
 
 	create: function() {

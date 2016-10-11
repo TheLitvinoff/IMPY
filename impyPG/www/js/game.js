@@ -4,7 +4,6 @@ game.global = {
 	impyName: '',
 	latitude: 0,
 	longitude: 0,
-	compArr: '', 
 	magHead: '',
 	clothesNumber: 3,
 	clothes: {
@@ -12,11 +11,11 @@ game.global = {
 			isEnabled: false,
 			isWearing: false, 
 			name: 'redGlasses',
-			price: 2,
+			price: 1,
 			check: 0
 		}
 	},
-	capsNum: 90,
+	capsNum: 0,
 	clothesSprite: null
 };
 

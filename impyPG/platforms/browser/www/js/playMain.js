@@ -25,12 +25,13 @@ var playMainState = {
 		//play sprite
 		this.playSprite = game.add.sprite(game.width - 100, 570, 'play');
 		this.playSprite.anchor.setTo(0.5, 0.5);
+		this.playSprite.inputEnabled = true;
+		this.playSprite.events.onInputDown.add(this.startClothes, this);
 
 		//animation of impy
 		this.impySprite.animations.add('blink', [1, 0], 5, false);
 		this.impySprite.inputEnabled = true;
 		this.impySprite.events.onInputDown.add(this.impyBlink, this);
-
 		//health
 		this.heartSprite = game.add.sprite(game.width -500, 1240, 'heart');
 		this.heartSprite.anchor.setTo(0.5, 0.5);
@@ -44,6 +45,8 @@ var playMainState = {
 
 		this.healthDecreaser = this.game.time.events.loop(Phaser.Timer.SECOND * 5, this.reduceProperties, this);
 		this.healthDecreaser.timer.start();
+
+		this.checkClothes();
 	},
 
 	update: function(){
@@ -74,7 +77,18 @@ var playMainState = {
 		this.impySprite.customParams.health = Math.max(20, this.impySprite.customParams.health + 20);
 		this.refreshHealth();
 	},
-	
+	startClothes: function() {
+		game.state.start('clothes');
+	},
+
+	checkClothes: function() {
+		for (var clothesUnit in game.global.clothes) {
+			if (game.global.clothes[clothesUnit]['isWearing']) {
+				this.clothesWear = game.add.sprite(game.width/2-90, game.height/2+25, game.global.clothes[clothesUnit]['name']);
+				this.clothesWear.anchor.setTo(0.5, 0.5);
+			}
+		}
+	}
 };
 
 

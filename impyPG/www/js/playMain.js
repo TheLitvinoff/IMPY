@@ -28,12 +28,10 @@ var playMainState = {
 		this.playSprite.inputEnabled = true;
 		this.playSprite.events.onInputDown.add(this.startClothes, this);
 
-
 		//animation of impy
 		this.impySprite.animations.add('blink', [1, 0], 5, false);
 		this.impySprite.inputEnabled = true;
 		this.impySprite.events.onInputDown.add(this.impyBlink, this);
-
 		//health
 		this.heartSprite = game.add.sprite(game.width -500, 1240, 'heart');
 		this.heartSprite.anchor.setTo(0.5, 0.5);

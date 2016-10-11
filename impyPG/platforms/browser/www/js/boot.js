@@ -7,7 +7,7 @@ var bootState = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		//scaling 
 		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-		game.scale.setMinMax(game.width/4, game.height/2.35, game.width*2, game.height*2);
+		game.scale.setMinMax(game.width/4, game.height/2, game.width*2, game.height*2);
 		game.scale.pageAlignHorizontally = true; 
 		game.scale.pageAlignVertically = true;
 		

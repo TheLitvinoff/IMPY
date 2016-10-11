@@ -19,35 +19,20 @@ var playGeoState = {
 		//clothes
 		this.clothes = game.add.physicsGroup();
 
-		//compass arrow
-		//game.global.compArr = game.add.sprite(game.width/2, game.height/2, 'compassArrow')
-		//game.global.compArr.anchor.setTo(0.5, 1);
-
-		game.global.latLabel = game.add.text(game.width/2, game.height/4 - 80,  'latitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
-	   	game.global.latLabel.anchor.setTo(0.5, 0.5);
-	   	game.global.lonLabel = game.add.text(game.width/2, game.height/4 - 200,  'longitude', {font: '50px Gloria Hallelujah', fill: '#ffffff', fontWeight: 'bold', align: 'center'});
-	    game.global.lonLabel.anchor.setTo(0.5, 0.5);
-
+		var capsMeter = game.add.sprite(game.width/2-100, 100, 'geoClothes');
+		this.capsLabel = game.add.text(game.width/2-10, 90,  ' : ' + game.global.capsNum, {font: '50px Gloria Hallelujah', fill: '#212121', fontWeight: 'bold', align: 'center'});
+	   	
 		this.addClothes();
 		this.setClothesPosition();
-		//game.global.magHead = 0;
-<<<<<<< HEAD
-	},
-
-	update: function() {
-		this.getGeo();
-		this.checkCompass();
-		this.checkClothesPosition();
-=======
+		game.global.magHead = 0;
 		this.getGeo();
 	},
 
 	update: function() {
-		this.checkCompass();
+		//this.checkCompass();
 		this.checkClothesPosition();
 
 		game.physics.arcade.overlap(this.clothes, this.impySprite, this.takeClothes, null, this);
->>>>>>> b2f28947ca7a688bc1c1f8f4f3d21fe7a927eaf4
 	}, 
 
 	getGeo: function() {
@@ -62,8 +47,6 @@ var playGeoState = {
 	   	function onSuccess(position) {
 	   		game.global.latitude = position.coords.latitude;
 	   		game.global.longitude = position.coords.longitude;
-	   		game.global.latLabel.setText(game.global.latitude);
-	   		game.global.lonLabel.setText(game.global.longitude);
 	   	};
 
 	   	function onError(error) {
@@ -73,47 +56,28 @@ var playGeoState = {
 	},
 
 	addClothes: function() {
-<<<<<<< HEAD
-		for (var i=0; i < 3; i++) {
-=======
 		for (var i=0; i < game.global.clothesNumber; i++) {
->>>>>>> b2f28947ca7a688bc1c1f8f4f3d21fe7a927eaf4
 			this.clothes.create(game.width, game.height, 'geoClothes');	
 		}
 	},
 
 	setClothesPosition: function() {
 		this.positions = [];
-<<<<<<< HEAD
-		for (var i = 0; i < 3; i++) {
-			var latitude = game.global.latitude + (Math.floor(Math.random() * 10) - 10)/10000;
-			var longitude = game.global.longitude + (Math.floor(Math.random() * 10) - 10)/10000;
-=======
 		for (var i = 0; i < game.global.clothesNumber; i++) {
 			var latitude = game.global.latitude + (Math.floor(Math.random() * 21) - 10)/10000;
 			var longitude = game.global.longitude + (Math.floor(Math.random() * 21) - 10)/10000;
->>>>>>> b2f28947ca7a688bc1c1f8f4f3d21fe7a927eaf4
 			var positionLatLon = [latitude, longitude];
 			this.positions[i] = positionLatLon;
 		}
 	},
 
 	checkClothesPosition: function() {
-<<<<<<< HEAD
-		if ((this.clothes.countLiving() > 0) && !(this.positions[2][1] === null)) {
-			for (var i = 0; i < 3; i++) {
-				var clothesLongitude = this.positions[i][1];
-				var clothesLatitude = this.positions[i][0];
-				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2));
-				var clothesGamePosY =   game.height/4 - ((clothesLatitude-game.global.latitude)*1000) * (game.height/4);
-=======
 		if ((this.clothes.countLiving() > 0) && !(this.positions[game.global.clothesNumber-1][1] === null)) {
 			for (var i = 0; i < game.global.clothesNumber; i++) {
 				var clothesLongitude = this.positions[i][1]; //longitude in 2-level array
 				var clothesLatitude = this.positions[i][0]; //latitude in 2-level array
 				var clothesGamePosX =  game.width/2 + (((clothesLongitude-game.global.longitude)*1000) * (game.width/2)); //translate from actual latitude and longitude to the screen size
 				var clothesGamePosY =  game.height/2 - (((clothesLatitude-game.global.latitude)*1000) * (game.height/4));
->>>>>>> b2f28947ca7a688bc1c1f8f4f3d21fe7a927eaf4
 				this.clothes.getAt(i).position.x = clothesGamePosX;
 				this.clothes.getAt(i).position.y = clothesGamePosY;
 
@@ -135,7 +99,6 @@ var playGeoState = {
 	checkCompass: function() {
 		function onSuccess(heading) {
 			game.global.magHead = heading.magneticHeading;
-		    //game.global.latLabel.setText(this.magHead); 
 		};
 
 		function onError(error) {
@@ -148,7 +111,8 @@ var playGeoState = {
 
 	takeClothes: function(impy, cap) {
 		cap.kill();
-		//game.state.start('playMain');
+		game.global.capsNum++;
+		this.capsLabel.setText(' : ' + game.global.capsNum);
 		game.global.clothesNumber--;
 	},
 
